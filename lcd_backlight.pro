@@ -34,6 +34,29 @@ HEADERS += \
 FORMS += \
         widget.ui
 
+
+contains(QMAKE_CC, arm-openstlinux_eglfs-linux-gnueabi-gcc) {
+    DEFINES += PLATFORM_ARM
+
+    CONFIG(debug, debug|release) {
+        message("Configuring for ARM-Debug build ...")
+        DEFINES += PLATFORM_DEBUG
+    } else {
+        message("Configuring for ARM-Release build ...")
+        DEFINES += PLATFORM_RELEASE
+    }
+} else {
+    DEFINES += PLATFORM_X86
+
+    CONFIG(debug, debug|release) {
+        message("Configuring for X86-Debug build ...")
+        DEFINES += PLATFORM_DEBUG
+    } else {
+        message("Configuring for X86-Release build ...")
+        DEFINES += PLATFORM_RELEASE
+    }
+}
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

@@ -3,6 +3,10 @@
 
 #include <QWidget>
 
+#include <QDebug>
+#include <QScreen>
+#include <QResizeEvent>
+
 namespace Ui {
 class Widget;
 }
@@ -14,6 +18,9 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
+
+protected:
+    void resizeEvent(QResizeEvent *event);
 
 private slots:
     void update_brightness(int);
